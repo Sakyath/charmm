@@ -43,7 +43,8 @@
   --color-ink: var(--ink);
 
   --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
   --font-script: "Pinyon Script", cursive;
 }
 
@@ -58,8 +59,7 @@ body {
   color: var(--espresso);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.78), transparent 42%),
-    linear-gradient(315deg, rgba(231, 201, 184, 0.22), transparent 48%),
-    var(--ivory);
+    linear-gradient(315deg, rgba(231, 201, 184, 0.22), transparent 48%), var(--ivory);
   background-attachment: fixed;
 }
 ::selection {
@@ -78,7 +78,10 @@ select {
 }
 button,
 a {
-  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease;
 }
 button:active,
 a:active {
@@ -102,9 +105,16 @@ select:focus {
 }
 
 /* ---------- Typography utilities ---------- */
-.font-display { font-family: var(--font-display); }
-.font-sans { font-family: var(--font-sans); }
-.script { font-family: var(--font-script); font-weight: 400; }
+.font-display {
+  font-family: var(--font-display);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+}
 
 .display-lg {
   font-family: var(--font-display);
@@ -163,14 +173,18 @@ select:focus {
   transform-origin: left;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.hairline-link:hover::after { transform: scaleX(1); }
+.hairline-link:hover::after {
+  transform: scaleX(1);
+}
 
 /* ---------- iOS-inspired surfaces ---------- */
 .ios-surface {
   background: var(--ios-surface);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--ios-radius);
-  box-shadow: var(--ios-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  box-shadow:
+    var(--ios-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
   -webkit-backdrop-filter: blur(24px) saturate(145%);
   backdrop-filter: blur(24px) saturate(145%);
 }
@@ -180,6 +194,10 @@ select:focus {
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.18);
   -webkit-backdrop-filter: blur(20px) saturate(155%);
   backdrop-filter: blur(20px) saturate(155%);
+}
+.navbar-contrast {
+  color: var(--ivory);
+  mix-blend-mode: difference;
 }
 .ios-separator {
   border-color: var(--ios-separator);
@@ -192,7 +210,8 @@ select:focus {
 .reveal {
   opacity: 0;
   transform: translateY(36px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
@@ -203,21 +222,40 @@ select:focus {
 
 /* ---------- iOS-style mobile sheet ---------- */
 @keyframes ios-sheet-in {
-  from { opacity: 0; transform: translateY(28px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 @keyframes ios-scrim-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes ios-row-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .ios-sheet {
   background: linear-gradient(145deg, var(--glass-surface-strong), var(--glass-surface)) !important;
   border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.62), inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   backdrop-filter: blur(32px) saturate(160%);
   animation: ios-sheet-in 0.52s cubic-bezier(0.32, 1.4, 0.44, 1) both;
@@ -238,10 +276,19 @@ select:focus {
 }
 
 /* ---------- Scrollbar ---------- */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--ivory); }
-::-webkit-scrollbar-thumb { background: var(--beige); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--wood); }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--beige);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wood);
+}
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -250,5 +297,8 @@ select:focus {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

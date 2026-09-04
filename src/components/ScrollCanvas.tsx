@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
 type Props = {
   frameDir: string;
@@ -8,6 +8,8 @@ type Props = {
   objectPosition?: string;
   alt: string;
   className?: string;
+  imageFilter?: string;
+  imageBlendMode?: CSSProperties["mixBlendMode"];
   overlay?: (progress: number) => ReactNode;
 };
 
@@ -23,6 +25,8 @@ export function ScrollCanvas({
   objectPosition = "center",
   alt,
   className = "",
+  imageFilter,
+  imageBlendMode,
   overlay,
 }: Props) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -68,9 +72,10 @@ export function ScrollCanvas({
             const element = wrapRef.current;
             if (!element) return;
             const total = element.getBoundingClientRect().height - window.innerHeight;
-            const currentProgress = total > 0
-              ? Math.max(0, Math.min(1, -element.getBoundingClientRect().top / total))
-              : 0;
+            const currentProgress =
+              total > 0
+                ? Math.max(0, Math.min(1, -element.getBoundingClientRect().top / total))
+                : 0;
             draw(currentProgress);
           });
           done();
@@ -85,7 +90,6 @@ export function ScrollCanvas({
       cancelled = true;
     };
   }, [frameDir, frameCount, reduce]);
-
 
   // intersection activation
   useEffect(() => {
@@ -182,7 +186,7 @@ export function ScrollCanvas({
           src={`${frameDir}/frame-${pad(0)}.jpg`}
           alt={alt}
           className="absolute inset-0 h-full w-full"
-          style={{ objectFit, objectPosition }}
+          style={{ objectFit, objectPosition, filter: imageFilter, mixBlendMode: imageBlendMode }}
         />
         {overlay?.(0)}
       </div>
@@ -195,7 +199,7 @@ export function ScrollCanvas({
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full"
-          style={{ objectFit, objectPosition }}
+          style={{ objectFit, objectPosition, filter: imageFilter, mixBlendMode: imageBlendMode }}
         />
         <img
           ref={staticRef}

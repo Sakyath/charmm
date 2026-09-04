@@ -32,7 +32,7 @@ export function Navbar() {
 
   return (
     <header className="ios-nav-glass sticky top-0 z-50 rounded-none border-b">
-      <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 md:px-10">
+      <div className="navbar-contrast mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 md:px-10">
         {/* Left: mobile menu */}
         <button
           type="button"
@@ -40,7 +40,7 @@ export function Navbar() {
           onClick={() => setOpen(true)}
           aria-label="Open menu"
         >
-          <Menu className="h-5 w-5 text-espresso" strokeWidth={1.3} />
+          <Menu className="h-5 w-5 text-inherit" strokeWidth={1.3} />
         </button>
 
         {/* Desktop links */}
@@ -49,7 +49,7 @@ export function Navbar() {
             <Link
               key={l.to}
               to={l.to}
-              className="hairline-link font-sans text-[0.62rem] uppercase tracking-[0.25em] text-espresso"
+              className="hairline-link font-sans text-[0.62rem] uppercase tracking-[0.25em] text-inherit"
             >
               {l.label}
             </Link>
@@ -58,7 +58,7 @@ export function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-          <span className="font-display text-2xl tracking-[0.18em] text-espresso md:text-3xl">
+          <span className="font-display text-2xl tracking-[0.18em] text-inherit md:text-3xl">
             Charmelle
           </span>
         </Link>
@@ -70,7 +70,7 @@ export function Navbar() {
               <Link
                 key={l.to}
                 to={l.to}
-                className="hairline-link font-sans text-[0.62rem] uppercase tracking-[0.25em] text-espresso"
+                className="hairline-link font-sans text-[0.62rem] uppercase tracking-[0.25em] text-inherit"
               >
                 {l.label}
               </Link>
@@ -80,12 +80,12 @@ export function Navbar() {
             type="button"
             onClick={() => setSearch(true)}
             aria-label="Search"
-            className="text-espresso"
+            className="text-inherit"
           >
-            <Search className="h-5 w-5" strokeWidth={1.3} />
+            <Search className="h-5 w-5 text-inherit" strokeWidth={1.3} />
           </button>
-          <Link to="/wishlist" aria-label="Wishlist" className="relative text-espresso">
-            <Heart className="h-5 w-5" strokeWidth={1.3} />
+          <Link to="/wishlist" aria-label="Wishlist" className="relative text-inherit">
+            <Heart className="h-5 w-5 text-inherit" strokeWidth={1.3} />
             {count > 0 && (
               <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-gold font-sans text-[0.5rem] text-ivory">
                 {count}

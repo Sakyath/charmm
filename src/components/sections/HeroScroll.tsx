@@ -11,13 +11,15 @@ export function HeroScroll() {
       objectFit="cover"
       objectPosition="center"
       alt="A handmade charm bracelet revealed in warm light"
-      className="relative"
+      imageFilter="brightness(1.35) saturate(1.08)"
+      imageBlendMode="screen"
+      className="relative bg-[#2f251c]"
       overlay={(progress) => {
         const fade1 = Math.max(0, 1 - progress * 3);
         const fade3 = Math.max(0, Math.min(1, (progress - 0.7) * 3));
         return (
           <>
-            <div className="absolute inset-0 bg-ink/30" />
+            <div className="absolute inset-0 bg-[#b38b61]/25 mix-blend-screen" />
             <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
               <div style={{ opacity: fade1, transition: "opacity 0.4s" }}>
                 <p className="eyebrow text-gold">Charmelle</p>
@@ -29,10 +31,16 @@ export function HeroScroll() {
                   Handmade charm jewellery for the moments you don't want to forget.
                 </p>
                 <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                  <Link to="/shop" className="bg-ivory px-9 py-4 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-espresso transition-colors hover:bg-champagne">
+                  <Link
+                    to="/shop"
+                    className="bg-ivory px-9 py-4 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-espresso transition-colors hover:bg-champagne"
+                  >
                     Explore Collection
                   </Link>
-                  <Link to="/customise" className="border border-champagne/40 px-9 py-4 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-champagne transition-colors hover:bg-champagne/10">
+                  <Link
+                    to="/customise"
+                    className="border border-champagne/40 px-9 py-4 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-champagne transition-colors hover:bg-champagne/10"
+                  >
                     Create Your Charm
                   </Link>
                 </div>
@@ -40,7 +48,11 @@ export function HeroScroll() {
             </div>
             <div
               className="absolute bottom-0 left-0 right-0 h-40"
-              style={{ opacity: fade3, transition: "opacity 0.5s", background: "linear-gradient(to bottom, transparent, var(--ivory))" }}
+              style={{
+                opacity: fade3,
+                transition: "opacity 0.5s",
+                background: "linear-gradient(to bottom, transparent, var(--ivory))",
+              }}
             />
           </>
         ) as ReactNode;
