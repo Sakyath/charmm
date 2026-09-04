@@ -58,7 +58,9 @@ export function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-          <span className="font-display text-2xl tracking-[0.18em] text-espresso md:text-3xl">Charmelle</span>
+          <span className="font-display text-2xl tracking-[0.18em] text-espresso md:text-3xl">
+            Charmelle
+          </span>
         </Link>
 
         {/* Right */}
@@ -94,92 +96,102 @@ export function Navbar() {
       </div>
 
       {/* Search overlay */}
-      {mounted && search && createPortal(
-        <div className="fixed inset-0 z-[60] bg-ivory/95 backdrop-blur-sm" role="dialog" aria-modal="true">
-          <div className="mx-auto max-w-2xl px-5 pt-24">
-            <div className="flex items-center justify-between">
-              <p className="eyebrow text-gold">Search</p>
-              <button onClick={() => setSearch(false)} aria-label="Close search">
-                <X className="h-5 w-5 text-espresso" strokeWidth={1.3} />
-              </button>
+      {mounted &&
+        search &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[60] bg-ivory/95 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="mx-auto max-w-2xl px-5 pt-24">
+              <div className="flex items-center justify-between">
+                <p className="eyebrow text-gold">Search</p>
+                <button onClick={() => setSearch(false)} aria-label="Close search">
+                  <X className="h-5 w-5 text-espresso" strokeWidth={1.3} />
+                </button>
+              </div>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (q.trim()) {
+                    window.location.href = `/shop?q=${encodeURIComponent(q.trim())}`;
+                  }
+                }}
+              >
+                <input
+                  autoFocus
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Search for charms, bracelets…"
+                  className="mt-6 w-full border-b border-espresso/20 bg-transparent py-3 font-display text-2xl text-espresso placeholder:text-stone/50 focus:outline-none"
+                />
+              </form>
             </div>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (q.trim()) {
-                  window.location.href = `/shop?q=${encodeURIComponent(q.trim())}`;
-                }
-              }}
-            >
-              <input
-                autoFocus
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Search for charms, bracelets…"
-                className="mt-6 w-full border-b border-espresso/20 bg-transparent py-3 font-display text-2xl text-espresso placeholder:text-stone/50 focus:outline-none"
-              />
-            </form>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body,
+        )}
 
       {/* Mobile drawer — iOS liquid-glass sheet */}
-      {mounted && open && createPortal(
-        <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
-          <div
-            className="ios-scrim absolute inset-0 bg-ink/30 backdrop-blur-[2px]"
-            onClick={() => setOpen(false)}
-          />
-          <div className="ios-sheet absolute inset-x-2 bottom-2 top-14 overflow-hidden rounded-[2.2rem] border border-ivory/40 bg-ivory/65 p-4 shadow-[0_24px_70px_-20px_rgba(16,11,6,0.45)] backdrop-blur-2xl backdrop-saturate-150">
-            {/* Grabber */}
-            <div className="mx-auto h-[5px] w-10 rounded-full bg-espresso/20" />
+      {mounted &&
+        open &&
+        createPortal(
+          <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
+            <div
+              className="ios-scrim absolute inset-0 bg-ink/30 backdrop-blur-[2px]"
+              onClick={() => setOpen(false)}
+            />
+            <div className="ios-sheet absolute inset-x-2 bottom-2 top-14 overflow-hidden rounded-[2.2rem] border border-ivory/40 bg-ivory/65 p-4 shadow-[0_24px_70px_-20px_rgba(16,11,6,0.45)] backdrop-blur-2xl backdrop-saturate-150">
+              {/* Grabber */}
+              <div className="mx-auto h-[5px] w-10 rounded-full bg-espresso/20" />
 
-            <div className="mt-4 flex items-center justify-between px-1">
-              <span className="font-display text-2xl tracking-[0.12em] text-espresso">Charmelle</span>
-              <button
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-                className="ios-glass-control flex h-9 w-9 items-center justify-center rounded-full text-espresso transition active:scale-90"
-              >
-                <X className="h-4 w-4" strokeWidth={1.6} />
-              </button>
-            </div>
-
-            <nav className="ios-glass-control mt-6 overflow-hidden rounded-[1.4rem]">
-              {links.map((l, i) => (
-                <Link
-                  key={l.to}
-                  to={l.to}
+              <div className="mt-4 flex items-center justify-between px-1">
+                <span className="font-display text-2xl tracking-[0.12em] text-espresso">
+                  Charmelle
+                </span>
+                <button
                   onClick={() => setOpen(false)}
-                  style={{ animationDelay: `${60 + i * 45}ms` }}
-                  className={`ios-row flex items-center justify-between px-5 py-4 font-sans text-[0.95rem] tracking-[0.01em] text-espresso transition active:bg-espresso/5 ${
-                    i > 0 ? "border-t border-espresso/10" : ""
-                  }`}
+                  aria-label="Close menu"
+                  className="ios-glass-control flex h-9 w-9 items-center justify-center rounded-full text-espresso transition active:scale-90"
                 >
-                  <span>{l.label}</span>
-                  <ChevronRight className="h-4 w-4 text-stone/70" strokeWidth={1.6} />
-                </Link>
-              ))}
-            </nav>
+                  <X className="h-4 w-4" strokeWidth={1.6} />
+                </button>
+              </div>
 
-            <a
-              href={GENERAL_WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="ios-row mt-4 flex items-center justify-center gap-2 rounded-[1.4rem] bg-espresso/90 px-5 py-4 font-sans text-[0.9rem] tracking-[0.02em] text-ivory backdrop-blur-xl transition active:scale-[0.98]"
-              style={{ animationDelay: "300ms" }}
-            >
-              WhatsApp {WHATSAPP_DISPLAY}
-            </a>
+              <nav className="ios-glass-control mt-6 overflow-hidden rounded-[1.4rem]">
+                {links.map((l, i) => (
+                  <Link
+                    key={l.to}
+                    to={l.to}
+                    onClick={() => setOpen(false)}
+                    style={{ animationDelay: `${60 + i * 45}ms` }}
+                    className={`ios-row flex items-center justify-between px-5 py-4 font-sans text-[0.95rem] tracking-[0.01em] text-espresso transition active:bg-espresso/5 ${
+                      i > 0 ? "border-t border-espresso/10" : ""
+                    }`}
+                  >
+                    <span>{l.label}</span>
+                    <ChevronRight className="h-4 w-4 text-stone/70" strokeWidth={1.6} />
+                  </Link>
+                ))}
+              </nav>
 
-            <p className="mt-5 text-center font-sans text-[0.6rem] uppercase tracking-[0.3em] text-stone/70">
-              Little charms. Big memories.
-            </p>
-          </div>
-        </div>,
-        document.body
-      )}
+              <a
+                href={GENERAL_WHATSAPP_LINK}
+                target="_blank"
+                rel="noreferrer"
+                className="ios-row mt-4 flex items-center justify-center gap-2 rounded-[1.4rem] bg-espresso/90 px-5 py-4 font-sans text-[0.9rem] tracking-[0.02em] text-ivory backdrop-blur-xl transition active:scale-[0.98]"
+                style={{ animationDelay: "300ms" }}
+              >
+                WhatsApp {WHATSAPP_DISPLAY}
+              </a>
+
+              <p className="mt-5 text-center font-sans text-[0.6rem] uppercase tracking-[0.3em] text-stone/70">
+                Little charms. Big memories.
+              </p>
+            </div>
+          </div>,
+          document.body,
+        )}
     </header>
   );
 }
