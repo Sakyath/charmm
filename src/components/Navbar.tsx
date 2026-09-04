@@ -112,40 +112,41 @@ export function Navbar() {
         </div>
       )}
 
-      {/* Mobile drawer */}
-      {open && (
-        <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-ink/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 bg-ivory p-6">
-            <div className="flex items-center justify-between">
-              <span className="font-display text-xl tracking-[0.15em]">Charmelle</span>
-              <button onClick={() => setOpen(false)} aria-label="Close menu">
-                <X className="h-5 w-5" strokeWidth={1.3} />
-              </button>
-            </div>
-            <nav className="mt-10 flex flex-col gap-6">
-              {links.map((l) => (
-                <Link
-                  key={l.to}
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  className="font-sans text-[0.7rem] uppercase tracking-[0.25em] text-espresso"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-            <a
-              href={GENERAL_WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-10 block font-sans text-[0.7rem] uppercase tracking-[0.2em] text-gold"
-            >
-              WhatsApp {WHATSAPP_DISPLAY}
-            </a>
-          </div>
-        </div>
-      )}
     </header>
+
+    {/* Keep the drawer outside the blurred header so fixed positioning uses the viewport. */}
+    {open && (
+      <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
+        <div className="absolute inset-0 bg-ink/40" onClick={() => setOpen(false)} />
+        <div className="absolute left-0 top-0 h-full w-72 bg-ivory p-6">
+          <div className="flex items-center justify-between">
+            <span className="font-display text-xl tracking-[0.15em]">Charmelle</span>
+            <button type="button" onClick={() => setOpen(false)} aria-label="Close menu">
+              <X className="h-5 w-5" strokeWidth={1.3} />
+            </button>
+          </div>
+          <nav className="mt-10 flex flex-col gap-6">
+            {links.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setOpen(false)}
+                className="font-sans text-[0.7rem] uppercase tracking-[0.25em] text-espresso"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <a
+            href={GENERAL_WHATSAPP_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-10 block font-sans text-[0.7rem] uppercase tracking-[0.2em] text-gold"
+          >
+            WhatsApp {WHATSAPP_DISPLAY}
+          </a>
+        </div>
+      </div>
+    )}
   );
 }
