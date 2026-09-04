@@ -21,6 +21,12 @@
   --glass-surface-strong: rgba(255, 255, 255, 0.16);
   --glass-border: rgba(255, 255, 255, 0.42);
   --glass-shadow: 0 24px 70px -20px rgba(16, 11, 6, 0.45);
+  --ios-blue: #007aff;
+  --ios-surface: rgba(255, 255, 255, 0.58);
+  --ios-surface-solid: #f8f8f6;
+  --ios-separator: rgba(42, 29, 18, 0.12);
+  --ios-radius: 1.25rem;
+  --ios-shadow: 0 12px 32px rgba(16, 11, 6, 0.08);
 }
 
 @theme inline {
@@ -37,7 +43,7 @@
   --color-ink: var(--ink);
 
   --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
   --font-script: "Pinyon Script", cursive;
 }
 
@@ -50,14 +56,49 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--espresso);
-  background: var(--ivory);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.78), transparent 42%),
+    linear-gradient(315deg, rgba(231, 201, 184, 0.22), transparent 48%),
+    var(--ivory);
+  background-attachment: fixed;
 }
 ::selection {
-  background: var(--gold);
+  background: rgba(0, 122, 255, 0.22);
   color: var(--ivory);
 }
 img {
   -webkit-user-drag: none;
+}
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a {
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+}
+button:active,
+a:active {
+  transform: scale(0.98);
+}
+input,
+textarea,
+select {
+  border-radius: 0.9rem;
+  border-color: var(--ios-separator);
+  background: var(--ios-surface);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(0, 122, 255, 0.55);
+  outline: 3px solid rgba(0, 122, 255, 0.14);
+  outline-offset: 0;
 }
 
 /* ---------- Typography utilities ---------- */
@@ -123,6 +164,22 @@ img {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .hairline-link:hover::after { transform: scaleX(1); }
+
+/* ---------- iOS-inspired surfaces ---------- */
+.ios-surface {
+  background: var(--ios-surface);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--ios-radius);
+  box-shadow: var(--ios-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  backdrop-filter: blur(24px) saturate(145%);
+}
+.ios-separator {
+  border-color: var(--ios-separator);
+}
+.ios-blue {
+  color: var(--ios-blue);
+}
 
 /* ---------- Reveal animation ---------- */
 .reveal {
