@@ -63,6 +63,16 @@ export function ScrollCanvas({
         img.src = `${frameDir}/frame-${pad(idx)}.jpg`;
         img.onload = () => {
           imagesRef.current[idx] = img;
+          requestAnimationFrame(() => {
+            if (cancelled) return;
+            const element = wrapRef.current;
+            if (!element) return;
+            const total = element.getBoundingClientRect().height - window.innerHeight;
+            const currentProgress = total > 0
+              ? Math.max(0, Math.min(1, -element.getBoundingClientRect().top / total))
+              : 0;
+            draw(currentProgress);
+          });
           done();
         };
         img.onerror = done;
