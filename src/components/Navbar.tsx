@@ -20,7 +20,8 @@ export function Navbar() {
   const { count } = useWishlist();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-espresso/10 bg-ivory/85 backdrop-blur-md">
+    <>
+      <header className="sticky top-0 z-50 border-b border-espresso/10 bg-ivory/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 md:px-10">
         {/* Left: mobile menu */}
         <button
@@ -112,13 +113,13 @@ export function Navbar() {
         </div>
       )}
 
-    </header>
+      </header>
 
     {/* Keep the drawer outside the blurred header so fixed positioning uses the viewport. */}
-    {open && (
-      <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
-        <div className="absolute inset-0 bg-ink/40" onClick={() => setOpen(false)} />
-        <div className="absolute left-0 top-0 h-full w-72 bg-ivory p-6">
+      {open && (
+        <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
+          <div className="absolute inset-0 bg-ink/40" onClick={() => setOpen(false)} />
+          <div className="absolute left-0 top-0 h-full w-72 bg-ivory p-6">
           <div className="flex items-center justify-between">
             <span className="font-display text-xl tracking-[0.15em]">Charmelle</span>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close menu">
@@ -145,8 +146,9 @@ export function Navbar() {
           >
             WhatsApp {WHATSAPP_DISPLAY}
           </a>
+          </div>
         </div>
-      </div>
-    )}
+      )}
+    </>
   );
 }
