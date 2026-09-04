@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, Heart, X } from "lucide-react";
+import { Menu, Search, Heart, X, ChevronRight } from "lucide-react";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { GENERAL_WHATSAPP_LINK } from "@/lib/whatsapp";
 import { WHATSAPP_DISPLAY } from "@/data/products";
@@ -18,10 +19,19 @@ export function Navbar() {
   const [search, setSearch] = useState(false);
   const [q, setQ] = useState("");
   const { count } = useWishlist();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    document.body.style.overflow = open || search ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open, search]);
 
   return (
-    <>
-      <header className="sticky top-0 z-50 border-b border-espresso/10 bg-ivory/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-espresso/10 bg-ivory/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 md:px-10">
         {/* Left: mobile menu */}
         <button
@@ -84,7 +94,7 @@ export function Navbar() {
       </div>
 
       {/* Search overlay */}
-      {search && (
+      {mounted && search && createPortal(
         <div className="fixed inset-0 z-[60] bg-ivory/95 backdrop-blur-sm" role="dialog" aria-modal="true">
           <div className="mx-auto max-w-2xl px-5 pt-24">
             <div className="flex items-center justify-between">
@@ -110,45 +120,66 @@ export function Navbar() {
               />
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
-      </header>
-
-    {/* Keep the drawer outside the blurred header so fixed positioning uses the viewport. */}
-      {open && (
+      {/* Mobile drawer — iOS liquid-glass sheet */}
+      {mounted && open && createPortal(
         <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-ink/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 bg-ivory p-6">
-          <div className="flex items-center justify-between">
-            <span className="font-display text-xl tracking-[0.15em]">Charmelle</span>
-            <button type="button" onClick={() => setOpen(false)} aria-label="Close menu">
-              <X className="h-5 w-5" strokeWidth={1.3} />
-            </button>
-          </div>
-          <nav className="mt-10 flex flex-col gap-6">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
+          <div
+            className="ios-scrim absolute inset-0 bg-ink/30 backdrop-blur-[2px]"
+            onClick={() => setOpen(false)}
+          />
+          <div className="ios-sheet absolute inset-x-2 bottom-2 top-14 overflow-hidden rounded-[2.2rem] border border-ivory/40 bg-ivory/65 p-4 shadow-[0_24px_70px_-20px_rgba(16,11,6,0.45)] backdrop-blur-2xl backdrop-saturate-150">
+            {/* Grabber */}
+            <div className="mx-auto h-[5px] w-10 rounded-full bg-espresso/20" />
+
+            <div className="mt-4 flex items-center justify-between px-1">
+              <span className="font-display text-2xl tracking-[0.12em] text-espresso">Charmelle</span>
+              <button
                 onClick={() => setOpen(false)}
-                className="font-sans text-[0.7rem] uppercase tracking-[0.25em] text-espresso"
+                aria-label="Close menu"
+                className="ios-glass-control flex h-9 w-9 items-center justify-center rounded-full text-espresso transition active:scale-90"
               >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-          <a
-            href={GENERAL_WHATSAPP_LINK}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-10 block font-sans text-[0.7rem] uppercase tracking-[0.2em] text-gold"
-          >
-            WhatsApp {WHATSAPP_DISPLAY}
-          </a>
+                <X className="h-4 w-4" strokeWidth={1.6} />
+              </button>
+            </div>
+
+            <nav className="ios-glass-control mt-6 overflow-hidden rounded-[1.4rem]">
+              {links.map((l, i) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  style={{ animationDelay: `${60 + i * 45}ms` }}
+                  className={`ios-row flex items-center justify-between px-5 py-4 font-sans text-[0.95rem] tracking-[0.01em] text-espresso transition active:bg-espresso/5 ${
+                    i > 0 ? "border-t border-espresso/10" : ""
+                  }`}
+                >
+                  <span>{l.label}</span>
+                  <ChevronRight className="h-4 w-4 text-stone/70" strokeWidth={1.6} />
+                </Link>
+              ))}
+            </nav>
+
+            <a
+              href={GENERAL_WHATSAPP_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="ios-row mt-4 flex items-center justify-center gap-2 rounded-[1.4rem] bg-espresso/90 px-5 py-4 font-sans text-[0.9rem] tracking-[0.02em] text-ivory backdrop-blur-xl transition active:scale-[0.98]"
+              style={{ animationDelay: "300ms" }}
+            >
+              WhatsApp {WHATSAPP_DISPLAY}
+            </a>
+
+            <p className="mt-5 text-center font-sans text-[0.6rem] uppercase tracking-[0.3em] text-stone/70">
+              Little charms. Big memories.
+            </p>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
-    </>
+    </header>
   );
 }
