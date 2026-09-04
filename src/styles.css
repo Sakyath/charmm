@@ -174,6 +174,13 @@ select:focus {
   -webkit-backdrop-filter: blur(24px) saturate(145%);
   backdrop-filter: blur(24px) saturate(145%);
 }
+.ios-nav-glass {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(20px) saturate(155%);
+  backdrop-filter: blur(20px) saturate(155%);
+}
 .ios-separator {
   border-color: var(--ios-separator);
 }

@@ -31,7 +31,7 @@ export function Navbar() {
   }, [open, search]);
 
   return (
-    <header className="ios-surface sticky top-0 z-50 rounded-none border-b border-espresso/10">
+    <header className="ios-nav-glass sticky top-0 z-50 rounded-none border-b">
       <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 md:px-10">
         {/* Left: mobile menu */}
         <button
