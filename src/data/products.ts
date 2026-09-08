@@ -13,8 +13,8 @@ export type Product = {
 };
 
 export const CATEGORIES = ["All", "Bracelets", "Charms", "Necklaces", "Gifts"] as const;
-export const WHATSAPP_NUMBER = "917396417317";
-export const WHATSAPP_DISPLAY = "+91 73964 17317";
+export const WHATSAPP_NUMBER = "916300790881";
+export const WHATSAPP_DISPLAY = "+91 63007 90881";
 export const INSTAGRAM_HANDLE = "@charmelle.jewellery";
 export const INSTAGRAM_URL = "https://instagram.com/charmelle.jewellery";
 export const BRAND_NAME = "Charmelle";
