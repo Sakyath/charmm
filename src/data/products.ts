@@ -133,6 +133,32 @@ export const products: readonly Product[] = [
     customisable: false,
     details: ["Glass & resin beads", "Elastic fit", "One size", "Ready to ship"],
   },
+  {
+    slug: "black-clover",
+    name: "Black Clover",
+    description: "A sleek bracelet finished with black clover charms for a bold little touch of luck.",
+    price: 20000,
+    images: ["/images/black-clover.jpg"],
+    alt: "Black Clover charm bracelet on a dark background",
+    category: "Bracelets",
+    collections: ["charms", "new"],
+    featured: true,
+    customisable: false,
+    details: ["Gold-tone brass base", "Black clover charms", "Adjustable 16–20 cm", "Ready to ship"],
+  },
+  {
+    slug: "couple-bracelet",
+    name: "Couple Bracelet",
+    description: "A matching bracelet set made to hold two stories close, wherever the day takes you.",
+    price: 35000,
+    images: ["/images/couple-bracelet.jpg"],
+    alt: "Matching couple bracelets styled together",
+    category: "Bracelets",
+    collections: ["beaded", "gifts", "new"],
+    featured: true,
+    customisable: false,
+    details: ["Matching bracelet pair", "Comfortable stretch fit", "One size", "Ready to ship"],
+  },
 ];
 
 export function productBySlug(slug: string): Product | undefined {

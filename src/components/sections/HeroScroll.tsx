@@ -19,7 +19,6 @@ export function HeroScroll() {
         const fade3 = Math.max(0, Math.min(1, (progress - 0.7) * 3));
         return (
           <>
-            <div className="absolute inset-0 bg-[#b38b61]/25 mix-blend-screen" />
             <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
               <div style={{ opacity: fade1, transition: "opacity 0.4s" }}>
                 <p className="eyebrow text-gold">Charmelle</p>
